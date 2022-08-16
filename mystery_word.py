@@ -33,6 +33,7 @@ def play_again():
 def guess_letters(word):
     # blank space for guesses
     letters_in_correct_word = ["_" for letter in word]
+    print(f'Number of letters to guesss: {len(word)}')
     right_choices = []
     wrong_choices = []
     tries = 8
