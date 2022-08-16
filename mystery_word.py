@@ -4,33 +4,20 @@ import random
 # grab word from file when play game
 
 
-# def grab_word(file):
-# with open('test-word.txt', 'r') as file:
-#correct_word = file.read().replace('\n', '')
-correct_word = (random.choice(open("words.txt", "r").read().split()))
-print(correct_word)
-# create list for wrong letters
-# create list for right letters
-# create file
-
-
-# random choice of word from file
-
-#correct_word = random.choice('test_word.txt')
-# ask user to guees the letters
-#print("Guess the letters")
-
+# if user guesses before return to random word choice from file
 def play_again():
-    correct_word = (random.choice(open("words.txt", "r").read().split()))
+
     play_it = input("Do you want to play again? (y/n)")
     if play_it == ("y"):
-        guess_letters(correct_word)
+        guess_letters()
     else:
         print("Later hater!")
 
 
 # create function that shows letters guessed
-def guess_letters(word):
+def guess_letters():
+    word = (random.choice(open("words.txt", "r").read().split()))
+    print(word)
     # blank space for guesses
     letters_in_correct_word = ["_" for letter in word]
     print(f'Number of letters to guesss: {len(word)}')
@@ -39,13 +26,16 @@ def guess_letters(word):
     tries = 8
     while tries > 0:
         guess = input("guess a letter ")
-        if guess in wrong_choices:
+        if len(guess) > 1:
+            print("Invalid input guess again")
+        elif guess in wrong_choices:
             print("You already guessed that!")
         elif guess in right_choices:
             print("Right guess but already guessed it!")
         # check first if the guess is not in the word
         elif guess not in word:
             wrong_choices.append(guess)
+# -1 guesses after guess incorrectly
             tries -= 1
             print(f'Wrong, you have {tries} more tries')
             print(f'Wrong letters: {wrong_choices}')
@@ -70,13 +60,4 @@ def guess_letters(word):
 
 
 if __name__ == "__main__":
-    guess_letters(correct_word)
-
-# def play_game(file):
-#     for word in file:
-
-
-# create a blank board based on the number of letters in the word
-# if user guesses before return to random word choice from file
-# -1 guesses after guess incorrectly
-# end game when user guesses all correct letters
+    guess_letters()
